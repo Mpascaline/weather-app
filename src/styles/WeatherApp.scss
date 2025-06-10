@@ -1,0 +1,282 @@
+// Variables
+$primary-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #3b82f6 75%, #8b5cf6 100%);
+$card-bg: linear-gradient(145deg, rgba(248, 250, 252, 0.15), rgba(241, 245, 249, 0.08));
+$glass-border: rgba(248, 250, 252, 0.2);
+$text-primary: white;
+$text-secondary: rgba(255, 255, 255, 0.8);
+
+// Main weather app container
+.weather-app {
+  min-height: 100vh;
+  background: $primary-gradient;
+  color: $text-primary;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+// Loading state styles
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+  }
+  
+  p {
+    font-size: 18px;
+    opacity: 0.9;
+  }
+}
+
+// Error state styles
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 400px;
+  
+  .error-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+  
+  h2 {
+    font-size: 24px;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  
+  p {
+    font-size: 16px;
+    opacity: 0.8;
+    margin-bottom: 24px;
+  }
+  
+  .retry-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 25px;
+    padding: 12px 24px;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// Search section styles
+.search-section {
+  margin-bottom: 30px;
+  width: 100%;
+  max-width: 400px;
+  
+  .search-form {
+    .search-input-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      
+      .search-input {
+        width: 100%;
+        padding: 16px 50px 16px 20px; 
+        border: none;
+        border-radius: 25px;
+        background: $card-bg;
+        backdrop-filter: blur(16px);
+        // border: 1px solid $glass-border;
+        color: white;
+        font-size: 16px;
+        outline: none;
+        transition: all 0.3s ease;
+        
+        &::placeholder {
+          color: $text-secondary;
+        }
+        
+        &:focus {
+        //   background: linear-gradient(145deg, rgba(248, 250, 252, 0.2), rgba(226, 232, 240, 0.12));
+        //   border-color: rgba(59, 130, 246, 0.4);
+        //   box-shadow: 0 8px 25px rgba(15, 23, 42, 0.2);
+          transform: translateY(-1px);
+        }
+      }
+      
+      .search-icon-btn {
+        position: absolute;
+        right: 12px;
+        background: none;
+        border: none;
+        color: rgba(255, 255, 255, 0.7);
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        
+        &:hover {
+          color: white;
+          background: rgba(255, 255, 255, 0.1);
+        }
+        
+        svg {
+          width: 18px;
+          height: 18px;
+        }
+      }
+    }
+  }
+}
+// Weather card styles
+.weather-card {
+//   background: $card-bg;
+  backdrop-filter: blur(24px);
+  border-radius: 20px;
+  padding: 50px 30px;
+//   border: 1px solid $glass-border;
+  box-shadow: 
+    0 20px 50px rgba(15, 23, 42, 0.3),
+    0 10px 30px rgba(59, 130, 246, 0.1),
+    inset 0 1px 0 rgba(135, 191, 248, 0.3);
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  
+  // Weather icon
+  .weather-icon {
+    margin-bottom: 20px;
+    
+    .icon {
+      font-size: 80px;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    }
+  }
+  
+  // Location
+  .location {
+    margin-bottom: 20px;
+    
+    h2 {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    
+    p {
+      font-size: 16px;
+      opacity: 0.8;
+    }
+  }
+  
+  // Main temperature
+  .temperature {
+    margin-bottom: 20px;
+    
+    .temp-value {
+      font-size: 72px;
+      font-weight: 200;
+      line-height: 1;
+      display: block;
+    }
+  }
+  
+  // Weather condition
+  .condition {
+    margin-bottom: 25px;
+    
+    .main-condition {
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+    
+    .description {
+      font-size: 16px;
+      opacity: 0.8;
+      text-transform: capitalize;
+    }
+  }
+  
+  // Weather details
+  .weather-details {
+    .feels-like {
+      font-size: 16px;
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+    
+    .high-low {
+      font-size: 16px;
+      margin-bottom: 20px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+    
+    .additional-info {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      
+      .info-item {
+        display: flex;
+        justify-content: center;
+        
+        span {
+          font-size: 14px;
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .weather-app {
+    padding: 10px;
+  }
+  
+  .weather-card {
+    padding: 30px 20px;
+    margin: 0 10px;
+    
+    .temperature .temp-value {
+      font-size: 60px;
+    }
+    
+    .weather-icon .icon {
+      font-size: 60px;
+    }
+  }
+}
